@@ -3,7 +3,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QPushBut
 import subprocess
 from PyQt5.QtGui import QIcon
 from PyQt5 import QtGui
-
+import os
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 class EnvyControl(QWidget):
 
@@ -23,21 +24,27 @@ class EnvyControl(QWidget):
         password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
         if ok:
             self.run_command('nvidia', password)
-            self.tray_icon.setIcon(QIcon('./nvidia.png'))
+            app_path = os.path.join(current_dir, "nvidia.png")
+            icon = QtGui.QIcon(app_path)
+            self.tray_icon.setIcon(QIcon(icon))
             self.update_status()
 
     def integrated_tray(self):
         password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
         if ok:
             self.run_command('integrated', password)
-            self.tray_icon.setIcon(QIcon('./integrated_amd.png'))
+            app_path = os.path.join(current_dir, "integrated_amd.png")
+            icon = QtGui.QIcon(app_path)
+            self.tray_icon.setIcon(QIcon(icon))
             self.update_status()
 
     def hybrid_tray(self):
         password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
         if ok:
             self.run_command('hybrid', password)
-            self.tray_icon.setIcon(QIcon('./hybrid.png'))
+            app_path = os.path.join(current_dir, "hybrid.png")
+            icon = QtGui.QIcon(app_path)
+            self.tray_icon.setIcon(QIcon(icon))
             self.update_status()
 
     def __init__(self):
@@ -46,7 +53,8 @@ class EnvyControl(QWidget):
 
     def initUI(self):
         self.setWindowTitle('EnvyControl Qt')
-        icon = QtGui.QIcon("./envycontrol.png")
+        app_path = os.path.join(current_dir, "envycontrol.png")
+        icon = QtGui.QIcon(app_path)
         self.setWindowIcon(icon)
         self.status_label = QLabel()
         self.update_status()
@@ -72,11 +80,17 @@ class EnvyControl(QWidget):
 
         icon_start = self.start_status()
         if icon_start == "integrated":
-            self.tray_icon.setIcon(QIcon('./integrated_amd.png'))
+            app_path = os.path.join(current_dir, "./integrated_amd.png")
+            icon = QtGui.QIcon(app_path)
+            self.tray_icon.setIcon(QIcon(icon))
         elif icon_start == "hybrid":
-            self.tray_icon.setIcon(QIcon('./hybrid.png'))
+            app_path = os.path.join(current_dir, "hybrid.png")
+            icon = QtGui.QIcon(app_path)
+            self.tray_icon.setIcon(QIcon(icon))
         elif icon_start == "nvidia":
-            self.tray_icon.setIcon(QIcon('./nvidia.png'))
+            app_path = os.path.join(current_dir, "nvidia.png")
+            icon = QtGui.QIcon(app_path)
+            self.tray_icon.setIcon(QIcon(icon))
 
         self.tray_icon.setVisible(True)
         self.tray_icon.show()

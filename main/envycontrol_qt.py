@@ -21,13 +21,17 @@ class EnvyControl(QWidget):
 
 
     def nvidia_tray(self):
-        password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
-        if ok:
-            self.run_command('nvidia', password)
-            app_path = os.path.join(current_dir, "nvidia.png")
-            icon = QtGui.QIcon(app_path)
-            self.tray_icon.setIcon(QIcon(icon))
-            self.update_status()
+        icon_start = self.start_status()
+        if icon_start == "hybrid":
+            password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
+            if ok:
+                self.run_command('nvidia', password)
+                app_path = os.path.join(current_dir, "nvidia.png")
+                icon = QtGui.QIcon(app_path)
+                self.tray_icon.setIcon(QIcon(icon))
+        else:
+            status = "Try switching to hybrid mode first!"
+            self.status_label.setText(status)
 
     def integrated_tray(self):
         password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
@@ -112,22 +116,32 @@ class EnvyControl(QWidget):
         password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
         if ok:
             self.run_command('integrated', password)
-            self.tray_icon.setIcon(QIcon('./integrated_amd.png'))
+            app_path = os.path.join(current_dir, "./integrated_amd.png")
+            icon = QtGui.QIcon(app_path)
+            self.tray_icon.setIcon(QIcon(icon))
             self.update_status()
 
     def on_hybrid_clicked(self):
         password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
         if ok:
             self.run_command('hybrid', password)
-            self.tray_icon.setIcon(QIcon('./hybrid.png'))
+            app_path = os.path.join(current_dir, "hybrid.png")
+            icon = QtGui.QIcon(app_path)
+            self.tray_icon.setIcon(QIcon(icon))
             self.update_status()
 
     def on_nvidia_clicked(self):
-        password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
-        if ok:
-            self.run_command('nvidia', password)
-            self.tray_icon.setIcon(QIcon('./nvidia.png'))
-            self.update_status()
+        icon_start = self.start_status()
+        if icon_start == "hybrid":
+            password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
+            if ok:
+                self.run_command('nvidia', password)
+                app_path = os.path.join(current_dir, "nvidia.png")
+                icon = QtGui.QIcon(app_path)
+                self.tray_icon.setIcon(QIcon(icon))
+        else:
+            status = "Try switching to hybrid mode first!"
+            self.status_label.setText(status)
 
     def update_status(self):
         result = subprocess.check_output(['envycontrol', '-q'])

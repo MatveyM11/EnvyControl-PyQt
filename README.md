@@ -7,7 +7,7 @@ Recored with [Peek](https://github.com/phw/peek)
 https://user-images.githubusercontent.com/23504691/218213253-9169b3bb-3d07-43b5-b0dc-fcabe41b2681.mp4
 
 
-To run it with .desktop file:
+- To run it with .desktop file:
 
 1. Make it executable
 2. Add fullpath to the script and icon in this lines -
@@ -16,3 +16,8 @@ To run it with .desktop file:
 Exec=python3 /full path to the script/envycontrol_qt.py
 Icon=/full path to the icon/envycontrol.png
 ```
+
+- Autostart
+
+On KDE plasma you can try into add `EnvyControl Qt.dekstopp` file to the autostart in Plasma Settings.
+If it's didn't worked, try manually place `EnvyControl Qt.dekstop` file into the `~/.config/autostart` folder.

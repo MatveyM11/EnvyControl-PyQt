@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=EnvyControl
+Exec=python3 /full path to the script/envycontrol_qt.py
+Icon=/full path to the icon/envycontrol.png
+Terminal=false
+Categories=Utilities;
+Comment=GPU switch control

@@ -19,7 +19,7 @@ Icon=/full path to the icon/envycontrol.png
 
 - Autostart
 
-On KDE plasma you can try into add `EnvyControl Qt.dekstopp` file to the autostart in Plasma Settings.
+On KDE plasma you can try to add `EnvyControl Qt.dekstopp` file to the autostart in Plasma Settings.
 If it's didn't worked, try manually place `EnvyControl Qt.dekstop` file into the `~/.config/autostart` folder.
 
 * You still need to rebood after change of the graphics mode.

@@ -5,6 +5,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5 import QtGui
 import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
+isHybrid = True
 
 class EnvyControl(QWidget):
 
@@ -22,7 +23,8 @@ class EnvyControl(QWidget):
 
     def nvidia_tray(self):
         icon_start = self.start_status()
-        if icon_start == "hybrid":
+        global isHybrid
+        if icon_start == "hybrid" and isHybrid == True:
             password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
             if ok:
                 self.run_command('nvidia', password)
@@ -32,6 +34,7 @@ class EnvyControl(QWidget):
         else:
             status = "Try switching to hybrid mode first!"
             self.status_label.setText(status)
+            isHybrid = False
 
     def integrated_tray(self):
         password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
@@ -132,7 +135,8 @@ class EnvyControl(QWidget):
 
     def on_nvidia_clicked(self):
         icon_start = self.start_status()
-        if icon_start == "hybrid":
+        global isHybrid
+        if icon_start == "hybrid" and isHybrid == True:
             password, ok = QInputDialog.getText(self, 'Password', 'Enter your sudo password:', QLineEdit.Password)
             if ok:
                 self.run_command('nvidia', password)
@@ -142,6 +146,7 @@ class EnvyControl(QWidget):
         else:
             status = "Try switching to hybrid mode first!"
             self.status_label.setText(status)
+            isHybrid = False
 
     def update_status(self):
         result = subprocess.check_output(['envycontrol', '-q'])

@@ -6,7 +6,7 @@ Recored with [Peek](https://github.com/phw/peek)
 
 https://user-images.githubusercontent.com/23504691/218213253-9169b3bb-3d07-43b5-b0dc-fcabe41b2681.mp4
 
-Dependencies:
+## Dependencies
 
 On Arch Linux/EndeavourOS/Manjaro/Garu/Artix and other Arch-based:
 - PyQt5
@@ -14,6 +14,8 @@ On Arch Linux/EndeavourOS/Manjaro/Garu/Artix and other Arch-based:
 ```terminal
 pip install pyqt5
 ```
+
+## Installation
 
 - To run it with .desktop file:
 

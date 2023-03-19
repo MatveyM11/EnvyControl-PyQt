@@ -1,7 +1,7 @@
 [Desktop Entry]
 GenericName=EnvyControl
 GenericName[ru]=EnvyControl
-GenericName[es_ES]=EnvyControll
+GenericName[es_ES]=EnvyControl
 GenericName[en]=EnvyControl
 
 Comment[ru]=Управление переключением ГП
@@ -9,9 +9,8 @@ Comment=Control del cambio de GPU
 Comment[es]=Control del cambio de GPU
 Comment[en]=GPU switch control
 
-Exec=python3 /home/USER/path-to-the-folder/EnvyControl-PyQt-main/main/envycontrol_qt.py
-
-Icon=/home/USER/path-to-the-folder/EnvyControl-PyQt-main/main/envycontrol.png
+Exec=python3 
+Icon=
 MimeType=
 Path=
 StartupNotify=true

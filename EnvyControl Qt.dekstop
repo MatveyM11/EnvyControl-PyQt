@@ -1,8 +1,23 @@
 [Desktop Entry]
-Type=Application
-Name=EnvyControl
-Exec=python3 /full path to the script/envycontrol_qt.py
-Icon=/full path to the icon/envycontrol.png
+GenericName=EnvyControl
+GenericName[ru]=EnvyControl
+GenericName[es_ES]=EnvyControll
+GenericName[en]=EnvyControl
+
+Comment[ru]=Управление переключением ГП
+Comment=Control del cambio de GPU
+Comment[es]=Control del cambio de GPU
+Comment[en]=GPU switch control
+
+Exec=python3 /home/USER/path-to-the-folder/EnvyControl-PyQt-main/main/envycontrol_qt.py
+
+Icon=/home/USER/path-to-the-folder/EnvyControl-PyQt-main/main/envycontrol.png
+MimeType=
+Path=
+StartupNotify=true
 Terminal=false
+TerminalOptions=
+Type=Application
 Categories=Utilities;
-Comment=GPU switch control
+X-KDE-SubstituteUID=false
+X-KDE-Username=

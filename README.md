@@ -17,15 +17,11 @@ pip install pyqt5
 
 ## Installation
 
-- To run it with .desktop file:
+1. Make install.sh executable:
+a) via GUI on right click Properties --> Permissions --> click `is executable`
+b) via terminal - `cd` into the directory with install.sh --> chmod +x  install.sh
 
-1. Make it executable
-2. Add fullpath to the script and icon in this lines -
-
-```desktop
-Exec=python3 /full path to the script/envycontrol_qt.py
-Icon=/full path to the icon/envycontrol.png
-```
+2. Run it on double click or in the terminal.
 
 - Autostart
 

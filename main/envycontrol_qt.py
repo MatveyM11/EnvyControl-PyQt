@@ -1,21 +1,21 @@
-import sys
+import sys, os, re, subprocess
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QPushButton, QLineEdit, QInputDialog, QSystemTrayIcon, QMenu
-import subprocess
 from PyQt5.QtGui import QIcon
 from PyQt5 import QtGui
-import os
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 isHybrid = True
 
 class EnvyControl(QWidget):
 
-
     def start_status(self):
-        result = subprocess.check_output(['envycontrol', '-q'])
-        sep = ': '
-        status = result.strip().decode()
-        status = status.split(sep, 1)[1]
-        return status
+        status_output = subprocess.check_output(['envycontrol', '-q']).decode().strip()
+        keywords = ["hybrid", "integrated", "nvidia"]
+        for keyword in keywords:
+            if re.search(keyword, status_output, re.IGNORECASE):
+                return keyword
+        return "envycontrol -q output style was changed"
+
 
     def quit(self):
         sys.exit()

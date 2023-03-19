@@ -23,7 +23,7 @@ b) via terminal - `cd` into the directory with install.sh --> chmod +x  install.
 
 2. Run it on double click or in the terminal.
 
-- Autostart
+### Autostart
 
 On KDE plasma you can try to add `EnvyControl Qt.dekstopp` file to the autostart in Plasma Settings.
 If it's didn't worked, try manually place `EnvyControl Qt.dekstop` file into the `~/.config/autostart` folder.

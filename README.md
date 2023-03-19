@@ -11,6 +11,7 @@ https://user-images.githubusercontent.com/23504691/218213253-9169b3bb-3d07-43b5-
 ## Dependencies
 
 On Arch Linux/EndeavourOS/Manjaro/Garuda/Artix and other Arch-based:
+- [EnvyControl](https://github.com/bayasdev/envycontrol)
 - PyQt5
 
 ```terminal

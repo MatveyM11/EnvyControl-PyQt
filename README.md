@@ -1,5 +1,6 @@
 # EnvyControl-PyQt
-PyQt5 widget for the [EnvyControl](https://github.com/bayasdev/envycontrol), program aimed to provide an easy way to switch GPU modes on Nvidia Optimus systems under Linux. Widget supports both windowed and  system tray mode.
+PyQt5 widget for the [EnvyControl](https://github.com/bayasdev/envycontrol), program aimed to provide an easy way to switch GPU modes on Nvidia Optimus systems under Linux.   
+Widget supports both windowed and  system tray mode.
 
 
 Recored with [Peek](https://github.com/phw/peek)
@@ -17,8 +18,8 @@ pip install pyqt5
 
 ## Installation
 
-1. Make install.sh executable:
-a) via GUI on right click Properties --> Permissions --> click `is executable`
+1. Make install.sh executable:  
+a) via GUI on right click Properties --> Permissions --> click `is executable`  
 b) via terminal - `cd` into the directory with install.sh --> chmod +x  install.sh
 
 2. Run it on double click or in the terminal.

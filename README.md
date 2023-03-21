@@ -4,7 +4,7 @@ PyQt5 widget for the [EnvyControl](https://github.com/bayasdev/envycontrol), pro
 Widget supports both windowed and  system tray mode.
 
 
-Recored with [Peek](https://github.com/phw/peek)
+Recorded with [Peek](https://github.com/phw/peek)
 
 https://user-images.githubusercontent.com/23504691/218213253-9169b3bb-3d07-43b5-b0dc-fcabe41b2681.mp4
 
@@ -22,7 +22,7 @@ pip install pyqt5
 
 1. Make install.sh executable:  
 a) via GUI on right click Properties --> Permissions --> click `is executable`  
-b) via terminal - `cd` into the directory with install.sh --> chmod +x  install.sh
+b) via terminal - `cd` into the directory with install.sh --> `chmod +x  install.sh`
 
 2. Run it on double click or in the terminal.
 

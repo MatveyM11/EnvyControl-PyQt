@@ -37,7 +37,14 @@ class EnvyControl(QWidget):
         # Execute the message box and get the result
         result = message_box.exec()
 
-    def get_igpu_vendor():
+        # Check the result and act accordingly
+        if result == QMessageBox.Yes:
+            print("You clicked Yes reboot")
+            subprocess.run(["sudo", "reboot"])
+        elif result == QMessageBox.No:
+            print("You clicked No")
+
+    def get_igpu_vendor(self):
         lspci_output = subprocess.check_output(["lspci"]).decode("utf-8")
         for line in lspci_output.splitlines():
             if "VGA compatible controller" in line or "Display controller" in line:
@@ -47,17 +54,8 @@ class EnvyControl(QWidget):
                     return "amd"
         return None
 
-        # Check the result and act accordingly
-        if result == QMessageBox.Yes:
-            print("You clicked Yes reboot")
-            subprocess.run(["sudo", "reboot"])
-        elif result == QMessageBox.No:
-            print("You clicked No")
-
     def quit(self):
         sys.exit()
-
-    igpu_vendor = get_igpu_vendor()
 
     def nvidia_tray(self):
         icon_start = self.start_status()
@@ -68,8 +66,7 @@ class EnvyControl(QWidget):
             )
             if ok:
                 self.run_command("nvidia", password)
-                app_path = os.path.join(current_dir, "nvidia.png")
-                icon = QtGui.QIcon(app_path)
+                icon = QtGui.QIcon(self.icon_path_nvidia)
                 self.tray_icon.setIcon(QIcon(icon))
         else:
             status = "Try switching to hybrid mode first!"
@@ -82,7 +79,7 @@ class EnvyControl(QWidget):
         )
         if ok:
             self.run_command("integrated", password)
-            icon = QtGui.QIcon(app_path)
+            icon = QtGui.QIcon(self.icon_path_integrated)
             self.tray_icon.setIcon(QIcon(icon))
             self.update_status()
 
@@ -92,16 +89,27 @@ class EnvyControl(QWidget):
         )
         if ok:
             self.run_command("hybrid --rtd3", password)
-            app_path = os.path.join(current_dir, "hybrid.png")
-            icon = QtGui.QIcon(app_path)
+            icon = QtGui.QIcon(self.icon_path_hybrid)
             self.tray_icon.setIcon(QIcon(icon))
             self.update_status()
+
+    def get_integrated_icon_path(self):
+        if self.igpu_vendor == "intel":
+            return os.path.join(current_dir, "integrated_intel.png")
+        elif self.igpu_vendor == "amd":
+            return os.path.join(current_dir, "integrated_amd.png")
+        return None
 
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
+        self.igpu_vendor = self.get_igpu_vendor()
+        self.icon_path_integrated = self.get_integrated_icon_path()
+        self.icon_path_hybrid = os.path.join(current_dir, "hybrid.png")
+        self.icon_path_nvidia = os.path.join(current_dir, "nvidia.png")
+
         self.setWindowTitle("EnvyControl Qt")
         app_path = os.path.join(current_dir, "envycontrol.png")
         icon = QtGui.QIcon(app_path)
@@ -130,20 +138,15 @@ class EnvyControl(QWidget):
 
         icon_start = self.start_status()
         if icon_start == "integrated":
-            if igpu_vendor == "intel":
-                app_path = os.path.join(current_dir, "./integrated_intel.png")
-            elif igpu_vendor == "amd":
-                app_path = os.path.join(current_dir, "./integrated_amd.png")
-                icon = QtGui.QIcon(app_path)
-                self.tray_icon.setIcon(QIcon(icon))
+            icon_path = self.icon_path_integrated
         elif icon_start == "hybrid":
-            app_path = os.path.join(current_dir, "hybrid.png")
-            icon = QtGui.QIcon(app_path)
-            self.tray_icon.setIcon(QIcon(icon))
+            icon_path = self.icon_path_hybrid
         elif icon_start == "nvidia":
-            app_path = os.path.join(current_dir, "nvidia.png")
-            icon = QtGui.QIcon(app_path)
-            self.tray_icon.setIcon(QIcon(icon))
+            icon_path = self.icon_path_nvidia
+        else:
+            raise "ERROR: Unknown status"
+        icon = QtGui.QIcon(icon_path)
+        self.tray_icon.setIcon(QIcon(icon))
 
         self.tray_icon.setVisible(True)
         self.tray_icon.show()
@@ -167,14 +170,10 @@ class EnvyControl(QWidget):
         )
         if ok:
             self.run_command("integrated", password)
-        if igpu_vendor == "intel":
-            app_path = os.path.join(current_dir, "./integrated_intel.png")
-        elif igpu_vendor == "amd":
-            app_path = os.path.join(current_dir, "./integrated_amd.png")
-            icon = QtGui.QIcon(app_path)
-            self.tray_icon.setIcon(QIcon(icon))
-            self.update_status()
-            self.reboot_system()
+        icon = QtGui.QIcon(self.icon_path_integrated)
+        self.tray_icon.setIcon(QIcon(icon))
+        self.update_status()
+        self.reboot_system()
 
     def on_hybrid_clicked(self):
         password, ok = QInputDialog.getText(
@@ -182,8 +181,7 @@ class EnvyControl(QWidget):
         )
         if ok:
             self.run_command("hybrid", password)
-            app_path = os.path.join(current_dir, "hybrid.png")
-            icon = QtGui.QIcon(app_path)
+            icon = QtGui.QIcon(self.icon_path_hybrid)
             self.tray_icon.setIcon(QIcon(icon))
             self.update_status()
             self.reboot_system()
@@ -197,8 +195,7 @@ class EnvyControl(QWidget):
             )
             if ok:
                 self.run_command("nvidia", password)
-                app_path = os.path.join(current_dir, "nvidia.png")
-                icon = QtGui.QIcon(app_path)
+                icon = QtGui.QIcon(self.icon_path_nvidia)
                 self.tray_icon.setIcon(QIcon(icon))
                 self.reboot_system()
         else:
